@@ -27,7 +27,7 @@ linter:
     always_use_package_imports: true
     annotate_overrides: true
     avoid_bool_literals_in_conditional_expressions: true
-    avoid_classes_with_only_static_members: true
+    #avoid_classes_with_only_static_members: true
     avoid_dynamic_calls: true
     avoid_empty_else: true
     avoid_equals_and_hash_code_on_mutable_classes: true
@@ -86,10 +86,10 @@ linter:
     prefer_asserts_in_initializer_lists: true
     prefer_collection_literals: true
     prefer_conditional_assignment: true
-    prefer_const_constructors: true
-    prefer_const_constructors_in_immutables: true
-    prefer_const_declarations: true
-    prefer_const_literals_to_create_immutables: true
+    # prefer_const_constructors: true
+    #prefer_const_constructors_in_immutables: true
+    #prefer_const_declarations: true
+    #prefer_const_literals_to_create_immutables: true
     prefer_contains: true
     prefer_equal_for_default_values: true
     prefer_final_fields: true

@@ -13,6 +13,9 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.2.1
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 dev_dependencies:
   flutter_test:
@@ -42,3 +45,5 @@ flutter:
           weight: 500
         - asset: res/fonts/Avenir-Black.ttf
           weight: 900
+
+  generate: true
