@@ -11,44 +11,49 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: LayoutBuilder(
-        builder: (_, BoxConstraints boxConstraints) {
-          final double imageHeight = boxConstraints.maxHeight * 0.3;
+    final Product product = generateProduct();
 
-          return Stack(
-            children: <Widget>[
-              PositionedDirectional(
-                top: 0.0,
-                start: 0.0,
-                end: 0.0,
-                height: imageHeight,
-                child: Image.network(
-                  'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?q=80&w=1310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                  fit: BoxFit.cover,
-                  cacheHeight:
-                      (imageHeight * MediaQuery.devicePixelRatioOf(context))
-                          .toInt(),
-                ),
-              ),
-              PositionedDirectional(
-                top: imageHeight - containerRadius,
-                start: 0.0,
-                end: 0.0,
-                bottom: 0.0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(containerRadius),
-                    ),
+    return ProductProvider(
+      product: product,
+      child: Scaffold(
+        body: LayoutBuilder(
+          builder: (_, BoxConstraints boxConstraints) {
+            final double imageHeight = boxConstraints.maxHeight * 0.3;
+
+            return Stack(
+              children: <Widget>[
+                PositionedDirectional(
+                  top: 0.0,
+                  start: 0.0,
+                  end: 0.0,
+                  height: imageHeight,
+                  child: Image.network(
+                    product.picture ?? '-',
+                    fit: BoxFit.cover,
+                    cacheHeight:
+                        (imageHeight * MediaQuery.devicePixelRatioOf(context))
+                            .toInt(),
                   ),
-                  child: _Body(),
                 ),
-              ),
-            ],
-          );
-        },
+                PositionedDirectional(
+                  top: imageHeight - containerRadius,
+                  start: 0.0,
+                  end: 0.0,
+                  bottom: 0.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(containerRadius),
+                      ),
+                    ),
+                    child: _Body(),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
@@ -85,13 +90,15 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Product product = ProductProvider.of(context).product;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text('Petits pois et carottes', style: context.theme.title1),
+        Text(product.name ?? '-', style: context.theme.title1),
         const SizedBox(height: 3.0),
-        Text('Cassegrain', style: context.theme.title2),
+        Text(product.brands?.join(', ') ?? '-', style: context.theme.title2),
         const SizedBox(height: 8.0),
       ],
     );
@@ -103,6 +110,8 @@ class _Scores extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Product product = ProductProvider.of(context).product;
+
     return ColoredBox(
       color: AppColors.grey1,
       child: Column(
@@ -116,7 +125,10 @@ class _Scores extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     flex: 44,
-                    child: _NutriScore(nutriscore: ProductNutriScore.A),
+                    child: _NutriScore(
+                      nutriscore:
+                          product.nutriScore ?? ProductNutriScore.unknown,
+                    ),
                   ),
 
                   Padding(
@@ -125,7 +137,9 @@ class _Scores extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 56,
-                    child: _NOVAScore(novaScore: ProductNovaScore.group3),
+                    child: _NOVAScore(
+                      novaScore: product.novaScore ?? ProductNovaScore.unknown,
+                    ),
                   ),
                 ],
               ),
@@ -137,7 +151,9 @@ class _Scores extends StatelessWidget {
               horizontal: _Body._kHorizontalPadding,
               vertical: 10.0,
             ),
-            child: _GreenScore(greenScore: ProductGreenScore.D),
+            child: _GreenScore(
+              greenScore: product.greenScore ?? ProductGreenScore.unknown,
+            ),
           ),
         ],
       ),
@@ -187,6 +203,7 @@ class _NOVAScore extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text('Groupe NOVA', style: context.theme.title3),
+        const SizedBox(height: 5.0),
         const SizedBox(height: 5.0),
         Text(_findLabel(), style: const TextStyle(color: AppColors.grey2)),
       ],
@@ -274,5 +291,27 @@ class _GreenScore extends StatelessWidget {
       ProductGreenScore.F => 'Impact environnemental très élevé',
       ProductGreenScore.unknown => 'Score non calculé',
     };
+  }
+}
+
+class ProductProvider extends InheritedWidget {
+  const ProductProvider({
+    required this.product,
+    required super.child,
+    super.key,
+  });
+
+  final Product product;
+
+  static ProductProvider of(BuildContext context) {
+    final ProductProvider? result = context
+        .dependOnInheritedWidgetOfExactType<ProductProvider>();
+    assert(result != null, 'No ColorProvider found in context');
+    return result!;
+  }
+
+  @override
+  bool updateShouldNotify(ProductProvider old) {
+    return product != old.product;
   }
 }
