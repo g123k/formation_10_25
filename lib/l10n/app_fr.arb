@@ -1,6 +1,5 @@
 {
-  "helloWorld": "Bienvenue!",
-  "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
-  }
+  "my_scans_screen_title": "Mes scans",
+  "my_scans_screen_description": "Vous n'avez pas encore scanné de produit",
+  "my_scans_screen_button": "Commencer"
 }
