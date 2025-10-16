@@ -6,9 +6,9 @@ class AppColors {
   static const Color blueDark = Color(0xFF050027);
   static const Color yellow = Color(0xFFFBAF02);
   static const Color blueLight = Color(0xFF41C7DF);
-  static const Color gray1 = Color(0xFFF6F6F8);
-  static const Color gray2 = Color(0xFFB8BBC6);
-  static const Color gray3 = Color(0xFF6A6A6A);
+  static const Color grey1 = Color(0xFFF6F6F8);
+  static const Color grey2 = Color(0xFFB8BBC6);
+  static const Color grey3 = Color(0xFF6A6A6A);
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
   static const Color nutrientLevelLow = Color(0xFF63993F);
