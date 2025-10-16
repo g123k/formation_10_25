@@ -111,6 +111,138 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Commencer'**
   String get my_scans_screen_button;
+
+  /// No description provided for @nova_group.
+  ///
+  /// In fr, this message translates to:
+  /// **'Groupe NOVA'**
+  String get nova_group;
+
+  /// No description provided for @nutriscore.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nutri-Score'**
+  String get nutriscore;
+
+  /// No description provided for @greenscore.
+  ///
+  /// In fr, this message translates to:
+  /// **'Green-Score'**
+  String get greenscore;
+
+  /// No description provided for @product_quantity.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quantité :'**
+  String get product_quantity;
+
+  /// No description provided for @product_countries.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vendu en :'**
+  String get product_countries;
+
+  /// No description provided for @product_vegan.
+  ///
+  /// In fr, this message translates to:
+  /// **'Végan'**
+  String get product_vegan;
+
+  /// No description provided for @product_vegetarian.
+  ///
+  /// In fr, this message translates to:
+  /// **'Végétarien'**
+  String get product_vegetarian;
+
+  /// No description provided for @product_tab_summary.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fiche'**
+  String get product_tab_summary;
+
+  /// No description provided for @product_tab_properties.
+  ///
+  /// In fr, this message translates to:
+  /// **'Caractéristiques'**
+  String get product_tab_properties;
+
+  /// No description provided for @product_tab_nutrition.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nutrition'**
+  String get product_tab_nutrition;
+
+  /// No description provided for @product_tab_nutrition_facts.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tableau'**
+  String get product_tab_nutrition_facts;
+
+  /// No description provided for @product_nutrition_facts_per_100g.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pour 100 g'**
+  String get product_nutrition_facts_per_100g;
+
+  /// No description provided for @product_nutrition_facts_per_serving.
+  ///
+  /// In fr, this message translates to:
+  /// **'Par portion'**
+  String get product_nutrition_facts_per_serving;
+
+  /// No description provided for @product_nutrition_facts_energy.
+  ///
+  /// In fr, this message translates to:
+  /// **'Énergie'**
+  String get product_nutrition_facts_energy;
+
+  /// No description provided for @product_nutrition_facts_fat.
+  ///
+  /// In fr, this message translates to:
+  /// **'Matières grasses'**
+  String get product_nutrition_facts_fat;
+
+  /// No description provided for @product_nutrition_facts_saturated_fats.
+  ///
+  /// In fr, this message translates to:
+  /// **'dont acides gras saturés'**
+  String get product_nutrition_facts_saturated_fats;
+
+  /// No description provided for @product_nutrition_facts_carbohydrates.
+  ///
+  /// In fr, this message translates to:
+  /// **'Glucides'**
+  String get product_nutrition_facts_carbohydrates;
+
+  /// No description provided for @product_nutrition_facts_sugars.
+  ///
+  /// In fr, this message translates to:
+  /// **'dont sucres'**
+  String get product_nutrition_facts_sugars;
+
+  /// No description provided for @product_nutrition_facts_fiber.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fibres alimentaires'**
+  String get product_nutrition_facts_fiber;
+
+  /// No description provided for @product_nutrition_facts_proteins.
+  ///
+  /// In fr, this message translates to:
+  /// **'Protéines'**
+  String get product_nutrition_facts_proteins;
+
+  /// No description provided for @product_nutrition_facts_salt.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sel'**
+  String get product_nutrition_facts_salt;
+
+  /// No description provided for @product_nutrition_facts_sodium.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sodium'**
+  String get product_nutrition_facts_sodium;
 }
 
 class _AppLocalizationsDelegate

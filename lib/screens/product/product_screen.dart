@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:off/l10n/app_localizations.dart';
 import 'package:off/model/product.dart';
-import 'package:off/res/app_colors.dart';
 import 'package:off/res/app_icons.dart';
-import 'package:off/res/app_theme_extension.dart';
+import 'package:off/screens/product/product_header.dart';
+import 'package:off/screens/product/product_provider.dart';
+import 'package:off/screens/product/tabs/product_tab0.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({super.key});
-
-  static const double containerRadius = 16.0;
 
   @override
   Widget build(BuildContext context) {
@@ -16,302 +16,43 @@ class ProductScreen extends StatelessWidget {
     return ProductProvider(
       product: product,
       child: Scaffold(
-        body: LayoutBuilder(
-          builder: (_, BoxConstraints boxConstraints) {
-            final double imageHeight = boxConstraints.maxHeight * 0.3;
-
-            return Stack(
-              children: <Widget>[
-                PositionedDirectional(
-                  top: 0.0,
-                  start: 0.0,
-                  end: 0.0,
-                  height: imageHeight,
-                  child: Image.network(
-                    product.picture ?? '-',
-                    fit: BoxFit.cover,
-                    cacheHeight:
-                        (imageHeight * MediaQuery.devicePixelRatioOf(context))
-                            .toInt(),
-                  ),
-                ),
-                PositionedDirectional(
-                  top: imageHeight - containerRadius,
-                  start: 0.0,
-                  end: 0.0,
-                  bottom: 0.0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(containerRadius),
-                      ),
-                    ),
-                    child: _Body(),
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class _Body extends StatelessWidget {
-  const _Body();
-
-  static const double _kHorizontalPadding = 20.0;
-  static const double _kVerticalPadding = 30.0;
-
-  @override
-  Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsetsDirectional.only(
-            start: _kHorizontalPadding,
-            end: _kHorizontalPadding,
-            top: _kVerticalPadding,
-            bottom: 10.0,
-          ),
-          child: _Header(),
-        ),
-        _Scores(),
-      ],
-    );
-  }
-}
-
-class _Header extends StatelessWidget {
-  const _Header();
-
-  @override
-  Widget build(BuildContext context) {
-    final Product product = ProductProvider.of(context).product;
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(product.name ?? '-', style: context.theme.title1),
-        const SizedBox(height: 3.0),
-        Text(product.brands?.join(', ') ?? '-', style: context.theme.title2),
-        const SizedBox(height: 8.0),
-      ],
-    );
-  }
-}
-
-class _Scores extends StatelessWidget {
-  const _Scores();
-
-  @override
-  Widget build(BuildContext context) {
-    final Product product = ProductProvider.of(context).product;
-
-    return ColoredBox(
-      color: AppColors.grey1,
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: _Body._kHorizontalPadding,
-            ),
-            child: IntrinsicHeight(
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 44,
-                    child: _NutriScore(
-                      nutriscore:
-                          product.nutriScore ?? ProductNutriScore.unknown,
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: const VerticalDivider(),
-                  ),
-                  Expanded(
-                    flex: 56,
-                    child: _NOVAScore(
-                      novaScore: product.novaScore ?? ProductNovaScore.unknown,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const Divider(),
-          Padding(
-            padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: _Body._kHorizontalPadding,
-              vertical: 10.0,
-            ),
-            child: _GreenScore(
-              greenScore: product.greenScore ?? ProductGreenScore.unknown,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _NutriScore extends StatelessWidget {
-  const _NutriScore({required this.nutriscore});
-
-  final ProductNutriScore nutriscore;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text('Nutri-Score', style: context.theme.title3),
-        const SizedBox(height: 5.0),
-        Image.asset(_findAssetName(), height: 48.0),
-      ],
-    );
-  }
-
-  String _findAssetName() {
-    return switch (nutriscore) {
-      ProductNutriScore.A => 'res/drawables/nutriscore_a.png',
-      ProductNutriScore.B => 'res/drawables/nutriscore_b.png',
-      ProductNutriScore.C => 'res/drawables/nutriscore_c.png',
-      ProductNutriScore.D => 'res/drawables/nutriscore_d.png',
-      ProductNutriScore.E => 'res/drawables/nutriscore_e.png',
-      ProductNutriScore.unknown => 'TODO',
-    };
-  }
-}
-
-class _NOVAScore extends StatelessWidget {
-  const _NOVAScore({required this.novaScore});
-
-  final ProductNovaScore novaScore;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text('Groupe NOVA', style: context.theme.title3),
-        const SizedBox(height: 5.0),
-        const SizedBox(height: 5.0),
-        Text(_findLabel(), style: const TextStyle(color: AppColors.grey2)),
-      ],
-    );
-  }
-
-  String _findLabel() {
-    return switch (novaScore) {
-      ProductNovaScore.group1 =>
-        'Aliments non transformés ou transformés minimalement',
-      ProductNovaScore.group2 => 'Ingrédients culinaires transformés',
-      ProductNovaScore.group3 => 'Aliments transformés',
-      ProductNovaScore.group4 =>
-        'Produits alimentaires et boissons ultra-transformés',
-      ProductNovaScore.unknown => 'Score non calculé',
-    };
-  }
-}
-
-class _GreenScore extends StatelessWidget {
-  const _GreenScore({required this.greenScore});
-
-  final ProductGreenScore greenScore;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text('Green-Score', style: context.theme.title3),
-        const SizedBox(height: 5.0),
-        Row(
-          children: <Widget>[
-            Icon(_findIcon(), color: _findIconColor()),
-            const SizedBox(width: 10.0),
-            Expanded(
-              child: Text(
-                _findLabel(),
-                style: const TextStyle(color: AppColors.grey2),
+        backgroundColor: Colors.white,
+        body: CustomScrollView(
+          slivers: <Widget>[
+            ProductHeader(),
+            SliverPadding(
+              padding: EdgeInsetsDirectional.only(top: 10.0),
+              sliver: SliverFillRemaining(
+                fillOverscroll: true,
+                hasScrollBody: false,
+                child: _getBody(),
               ),
             ),
           ],
         ),
-      ],
+      ),
     );
   }
 
-  IconData _findIcon() {
-    return switch (greenScore) {
-      ProductGreenScore.APlus => AppIcons.ecoscore_a_plus,
-      ProductGreenScore.A => AppIcons.ecoscore_a,
-      ProductGreenScore.B => AppIcons.ecoscore_b,
-      ProductGreenScore.C => AppIcons.ecoscore_c,
-      ProductGreenScore.D => AppIcons.ecoscore_d,
-      ProductGreenScore.E => AppIcons.ecoscore_e,
-      ProductGreenScore.F => AppIcons.ecoscore_f,
-      // TODO
-      ProductGreenScore.unknown => AppIcons.ecoscore_e,
-    };
-  }
-
-  Color _findIconColor() {
-    return switch (greenScore) {
-      ProductGreenScore.APlus => AppColors.greenScoreAPlus,
-      ProductGreenScore.A => AppColors.greenScoreA,
-      ProductGreenScore.B => AppColors.greenScoreB,
-      ProductGreenScore.C => AppColors.greenScoreC,
-      ProductGreenScore.D => AppColors.greenScoreD,
-      ProductGreenScore.E => AppColors.greenScoreE,
-      ProductGreenScore.F => AppColors.greenScoreF,
-      // TODO
-      ProductGreenScore.unknown => Colors.transparent,
-    };
-  }
-
-  String _findLabel() {
-    return switch (greenScore) {
-      ProductGreenScore.APlus => 'Très faible impact environnemental',
-      ProductGreenScore.A => 'Très faible impact environnemental',
-      ProductGreenScore.B => 'Faible impact environnemental',
-      ProductGreenScore.C => "Impact modéré sur l'environnement",
-      ProductGreenScore.D => 'Impact environnemental élevé',
-      ProductGreenScore.E => 'Impact environnemental très élevé',
-      ProductGreenScore.F => 'Impact environnemental très élevé',
-      ProductGreenScore.unknown => 'Score non calculé',
-    };
-  }
+  Widget _getBody() => ProductTab0();
 }
 
-class ProductProvider extends InheritedWidget {
-  const ProductProvider({
-    required this.product,
-    required super.child,
-    super.key,
-  });
+enum ProductDetailsCurrentTab {
+  summary(AppIcons.tab_barcode),
+  info(AppIcons.tab_fridge),
+  nutrition(AppIcons.tab_nutrition),
+  nutritionalValues(AppIcons.tab_array);
 
-  final Product product;
+  const ProductDetailsCurrentTab(this.icon);
 
-  static ProductProvider of(BuildContext context) {
-    final ProductProvider? result = context
-        .dependOnInheritedWidgetOfExactType<ProductProvider>();
-    assert(result != null, 'No ColorProvider found in context');
-    return result!;
-  }
+  final IconData icon;
 
-  @override
-  bool updateShouldNotify(ProductProvider old) {
-    return product != old.product;
-  }
+  String label(AppLocalizations appLocalizations) => switch (this) {
+    ProductDetailsCurrentTab.summary => appLocalizations.product_tab_summary,
+    ProductDetailsCurrentTab.info => appLocalizations.product_tab_properties,
+    ProductDetailsCurrentTab.nutrition =>
+      appLocalizations.product_tab_nutrition,
+    ProductDetailsCurrentTab.nutritionalValues =>
+      appLocalizations.product_tab_nutrition_facts,
+  };
 }

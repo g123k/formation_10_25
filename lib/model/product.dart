@@ -1,30 +1,5 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, unnecessary_string_escapes
 class Product {
-  final String barcode;
-  final String? name;
-  final String? altName;
-  final String? picture;
-  final String? quantity;
-  final List<String>? brands;
-  final List<String>? manufacturingCountries;
-  final ProductNutriScore? nutriScore;
-  final ProductNutriScoreLevels? nutriScoreLevels;
-  final ProductNovaScore? novaScore;
-  final ProductGreenScore? greenScore;
-  final List<String>? ingredients;
-
-  // Eg: "Sucre, <span class=\"allergen\">gluten de blé</span>"
-  final String? ingredientsWithAllergens;
-  final List<String>? traces;
-  final List<String>? allergens;
-  final Map<String, String>? additives;
-  final NutrientLevels? nutrientLevels;
-  final NutritionFacts? nutritionFacts;
-  final bool? ingredientsFromPalmOil;
-  final ProductAnalysis? containsPalmOil;
-  final ProductAnalysis? isVegan;
-  final ProductAnalysis? isVegetarian;
-
   Product({
     required this.barcode,
     this.name,
@@ -49,21 +24,34 @@ class Product {
     this.isVegan,
     this.isVegetarian,
   });
+
+  final String barcode;
+  final String? name;
+  final String? altName;
+  final String? picture;
+  final String? quantity;
+  final List<String>? brands;
+  final List<String>? manufacturingCountries;
+  final ProductNutriScore? nutriScore;
+  final ProductNutriScoreLevels? nutriScoreLevels;
+  final ProductNovaScore? novaScore;
+  final ProductGreenScore? greenScore;
+  final List<String>? ingredients;
+
+  // Eg: "Sucre, <span class=\"allergen\">gluten de blé</span>"
+  final String? ingredientsWithAllergens;
+  final List<String>? traces;
+  final List<String>? allergens;
+  final Map<String, String>? additives;
+  final NutrientLevels? nutrientLevels;
+  final NutritionFacts? nutritionFacts;
+  final bool? ingredientsFromPalmOil;
+  final ProductAnalysis? containsPalmOil;
+  final ProductAnalysis? isVegan;
+  final ProductAnalysis? isVegetarian;
 }
 
 class NutritionFacts {
-  final String servingSize;
-  final Nutriment? calories;
-  final Nutriment? fat;
-  final Nutriment? saturatedFat;
-  final Nutriment? carbohydrate;
-  final Nutriment? sugar;
-  final Nutriment? fiber;
-  final Nutriment? proteins;
-  final Nutriment? sodium;
-  final Nutriment? salt;
-  final Nutriment? energy;
-
   NutritionFacts({
     required this.servingSize,
     this.calories,
@@ -77,34 +65,38 @@ class NutritionFacts {
     this.salt,
     this.energy,
   });
+
+  final String servingSize;
+  final Nutriment? calories;
+  final Nutriment? fat;
+  final Nutriment? saturatedFat;
+  final Nutriment? carbohydrate;
+  final Nutriment? sugar;
+  final Nutriment? fiber;
+  final Nutriment? proteins;
+  final Nutriment? sodium;
+  final Nutriment? salt;
+  final Nutriment? energy;
 }
 
 class Nutriment {
+  Nutriment({required this.unit, this.perServing, this.per100g});
+
   final String unit;
   final dynamic perServing;
   final dynamic per100g;
-
-  Nutriment({required this.unit, this.perServing, this.per100g});
 }
 
 class NutrientLevels {
+  NutrientLevels({this.salt, this.saturatedFat, this.sugars, this.fat});
+
   final String? salt;
   final String? saturatedFat;
   final String? sugars;
   final String? fat;
-
-  NutrientLevels({this.salt, this.saturatedFat, this.sugars, this.fat});
 }
 
 class ProductNutriScoreLevels {
-  final ProductNutriScoreLevel? energy;
-  final ProductNutriScoreLevel? fiber;
-  final ProductNutriScoreLevel? fruitsVegetablesLegumes;
-  final ProductNutriScoreLevel? proteins;
-  final ProductNutriScoreLevel? salt;
-  final ProductNutriScoreLevel? saturatedFat;
-  final ProductNutriScoreLevel? sugars;
-
   ProductNutriScoreLevels({
     required this.energy,
     required this.fiber,
@@ -114,15 +106,17 @@ class ProductNutriScoreLevels {
     required this.saturatedFat,
     required this.sugars,
   });
+
+  final ProductNutriScoreLevel? energy;
+  final ProductNutriScoreLevel? fiber;
+  final ProductNutriScoreLevel? fruitsVegetablesLegumes;
+  final ProductNutriScoreLevel? proteins;
+  final ProductNutriScoreLevel? salt;
+  final ProductNutriScoreLevel? saturatedFat;
+  final ProductNutriScoreLevel? sugars;
 }
 
 class ProductNutriScoreLevel {
-  final double points;
-  final double maxPoints;
-  final String unit;
-  final double value;
-  final ProductNutriScoreLevelType type;
-
   ProductNutriScoreLevel({
     required this.points,
     required this.maxPoints,
@@ -130,6 +124,12 @@ class ProductNutriScoreLevel {
     required this.value,
     required this.type,
   });
+
+  final double points;
+  final double maxPoints;
+  final String unit;
+  final double value;
+  final ProductNutriScoreLevelType type;
 }
 
 enum ProductNutriScoreLevelType { positive, negative, unknown }
@@ -162,12 +162,12 @@ Product generateProduct() => Product(
   picture:
       'https://images.openfoodfacts.org/images/products/301/762/042/5035/front_fr.533.400.jpg',
   quantity: '200g',
-  brands: ['Ferrero', 'Ferrero'],
-  manufacturingCountries: ['France', 'Italie'],
+  brands: <String>['Ferrero', 'Ferrero'],
+  manufacturingCountries: <String>['France', 'Italie'],
   nutriScore: ProductNutriScore.E,
   novaScore: ProductNovaScore.group4,
   greenScore: ProductGreenScore.D,
-  ingredients: [
+  ingredients: <String>[
     'Sucre',
     'sirop de glucose',
     '_lait_ écrémé',
@@ -198,9 +198,9 @@ Product generateProduct() => Product(
   ],
   ingredientsWithAllergens:
       'Sucre, sirop de glucose, <span class=\"allergen\">lait</span> écrémé, crème légère (<span class=\"allergen\">lait</span>), eau, beurre de cacao, matière grasse de noix de coco, <span class=\"allergen\">lait</span> écrémé concentré sucré, pâte de cacao, farine de <span class=\"allergen\">blé</span>, matière grasse de palme, <span class=\"allergen\">lait</span> écrémé en poudre, <span class=\"allergen\">lactose</span>, matière grasse du <span class=\"allergen\">lait</span>, huile de palmiste, petit-<span class=\"allergen\">lait</span> en poudre, cacao maigre, <span class=\"allergen\">beurre</span> (<span class=\"allergen\">lait</span>), émulsifiants (lécithine de <span class=\"allergen\">soja</span>, E471, tristéarate de sorbitane), <span class=\"allergen\">lait</span> entier en poudre, stabilisants (E407, E410, E412), arômes naturels (<span class=\"allergen\">lait</span>), sel, colorant naturel (caramel ordinaire), cacao en poudre, poudre à lever (E503), extrait naturel de vanille. (Peut contenir<span class=\"allergen\">: cacahuète</span>, <span class=\"allergen\">noisette</span>, <span class=\"allergen\">amande</span>).',
-  traces: ['cacahuète', 'noisette', 'amande'],
-  allergens: ['lait', 'soja', 'beurre'],
-  additives: {'e322i': 'Description', 'e471': 'Description'},
+  traces: <String>['cacahuète', 'noisette', 'amande'],
+  allergens: <String>['lait', 'soja', 'beurre'],
+  additives: <String, String>{'e322i': 'Description', 'e471': 'Description'},
   nutriScoreLevels: ProductNutriScoreLevels(
     energy: ProductNutriScoreLevel(
       points: 3,
@@ -260,15 +260,14 @@ Product generateProduct() => Product(
   ),
   nutritionFacts: NutritionFacts(
     servingSize: '100g',
-    calories: Nutriment(unit: 'kcal', perServing: 100, per100g: 100),
-    fat: Nutriment(unit: 'g', perServing: 10, per100g: 10),
-    saturatedFat: Nutriment(unit: 'g', perServing: 5, per100g: 5),
-    carbohydrate: Nutriment(unit: 'g', perServing: 20, per100g: 20),
-    sugar: Nutriment(unit: 'g', perServing: 10, per100g: 10),
-    fiber: Nutriment(unit: 'g', perServing: 5, per100g: 5),
-    proteins: Nutriment(unit: 'g', perServing: 10, per100g: 10),
-    sodium: Nutriment(unit: 'mg', perServing: 100, per100g: 100),
-    salt: Nutriment(unit: 'g', perServing: 0.1, per100g: 0.1),
+    calories: Nutriment(unit: 'kcal', per100g: 100, perServing: 50),
+    fat: Nutriment(unit: 'g', per100g: 10, perServing: 7),
+    saturatedFat: Nutriment(unit: 'g', per100g: 5, perServing: 3),
+    carbohydrate: Nutriment(unit: 'g', per100g: 20, perServing: 17),
+    sugar: Nutriment(unit: 'g', per100g: 10, perServing: 5),
+    fiber: Nutriment(unit: 'g', per100g: 5, perServing: 3),
+    proteins: Nutriment(unit: 'g', per100g: 10, perServing: 7),
+    sodium: Nutriment(unit: 'mg', per100g: 100, perServing: 50),
+    salt: Nutriment(unit: 'g', per100g: 0.1, perServing: 0.05),
   ),
 );
-

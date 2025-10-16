@@ -24,6 +24,17 @@ class MyApp extends StatelessWidget {
         ],
         dividerTheme: DividerThemeData(color: AppColors.grey2, space: 1.0),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          selectedItemColor: AppColors.blue,
+          unselectedItemColor: AppColors.grey2,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+        ),
+        navigationBarTheme: const NavigationBarThemeData(
+          indicatorColor: AppColors.blue,
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: const ProductScreen(),
