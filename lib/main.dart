@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:off/l10n/app_localizations.dart';
-import 'package:off/screens/homepage/homepage_screen.dart';
+import 'package:off/screens/product/product_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       debugShowCheckedModeBanner: false,
-      home: const HomepageScreen(),
+      home: const ProductScreen(),
     );
   }
 }
