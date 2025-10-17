@@ -10,55 +10,6 @@ import 'package:provider/provider.dart';
 class ProductTab0 extends StatelessWidget {
   const ProductTab0({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return _Body();
-  }
-}
-
-class _HeaderIcon extends StatelessWidget {
-  const _HeaderIcon({required this.icon, this.tooltip, this.onPressed});
-
-  final IconData icon;
-  final String? tooltip;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsetsDirectional.all(8.0),
-        child: Material(
-          type: MaterialType.transparency,
-          child: Tooltip(
-            message: tooltip,
-            child: InkWell(
-              onTap: onPressed ?? () {},
-              customBorder: const CircleBorder(),
-              child: Ink(
-                padding: const EdgeInsetsDirectional.only(
-                  start: 18.0,
-                  end: 12.0,
-                  top: 15.0,
-                  bottom: 15.0,
-                ),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white.withValues(alpha: 0.0),
-                ),
-                child: Icon(icon, color: Colors.white),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _Body extends StatelessWidget {
-  const _Body();
-
   static const double _kHorizontalPadding = 20.0;
 
   @override
@@ -82,7 +33,7 @@ class _Body extends StatelessWidget {
 class _Scores extends StatelessWidget {
   const _Scores();
 
-  static const double _horizontalPadding = _Body._kHorizontalPadding;
+  static const double _horizontalPadding = ProductTab0._kHorizontalPadding;
   static const double _verticalPadding = 18.0;
 
   @override

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:off/api/model/product_response.dart';
+import 'package:off/api/openfoodfacts_api.dart';
 import 'package:off/model/product.dart';
 
 class ProductNotifier extends ChangeNotifier {
@@ -11,7 +13,10 @@ class ProductNotifier extends ChangeNotifier {
 
   Future<void> loadProduct() async {
     await Future<void>.delayed(const Duration(seconds: 1));
-    _product = generateProduct();
+
+    final ProductAPIEntity product = await OpenFoodFactsAPIManager()
+        .loadProduct(barcode);
+    _product = product.response?.toProduct();
     notifyListeners();
   }
 

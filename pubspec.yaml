@@ -15,15 +15,32 @@ dependencies:
     sdk: flutter
   intl: any
 
+  # UI
   flutter_svg: 2.2.1
-  sliver_tools: 0.2.12
-  provider: 6.1.5+1
   go_router: 16.2.5
+  sliver_tools: 0.2.12
+
+  # Gestion d'état
+  provider: 6.1.5+1
+
+  # Requêtes
+  dio: 5.9.0
+  retrofit: 4.7.3
+  json_annotation: 4.9.0
+
+  # Injection de dépendances
+  get_it: ^8.2.0
+  injectable: ^2.5.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+
+  # Génération de code pour les requêtes
+  retrofit_generator: 10.0.6
+  json_serializable: any
+  build_runner: 2.9.0
 
 flutter:
 

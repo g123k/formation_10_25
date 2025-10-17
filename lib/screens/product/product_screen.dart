@@ -30,7 +30,7 @@ class _ProductScreenState extends State<ProductScreen> {
     final AppLocalizations localizations = AppLocalizations.of(context)!;
 
     return ChangeNotifierProvider<ProductNotifier>(
-      create: (_) => ProductNotifier(barcode: '123456789'),
+      create: (_) => ProductNotifier(barcode: '5000159484695'),
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Consumer<ProductNotifier>(
@@ -39,7 +39,7 @@ class _ProductScreenState extends State<ProductScreen> {
               return const Center(child: CircularProgressIndicator());
             } else {
               return Column(
-                children: [
+                children: <Widget>[
                   Expanded(
                     child: CustomScrollView(
                       slivers: <Widget>[
@@ -100,12 +100,6 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
       ],
     );
-    return switch (_tab) {
-      ProductDetailsCurrentTab.summary => ProductTab0(),
-      ProductDetailsCurrentTab.info => ProductTab1(),
-      ProductDetailsCurrentTab.nutrition => ProductTab2(),
-      ProductDetailsCurrentTab.nutritionalValues => ProductTab3(),
-    };
   }
 }
 

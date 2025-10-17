@@ -14,7 +14,7 @@ GoRouter _router = GoRouter(
   routes: <GoRoute>[
     GoRoute(
       path: '/',
-      builder: (_, _) => const HomepageScreen(),
+      builder: (_, _) => HomepageScreen(),
       routes: <GoRoute>[
         GoRoute(
           path: 'product',
