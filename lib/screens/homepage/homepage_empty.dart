@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:off/l10n/app_localizations.dart';
 import 'package:off/res/app_colors.dart';
 import 'package:off/res/app_vectorial_images.dart';
 
 class HomepageEmpty extends StatelessWidget {
-  const HomepageEmpty({super.key});
+  const HomepageEmpty({super.key, this.onScan});
+
+  final VoidCallback? onScan;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class HomepageEmpty extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(22.0)),
                       ),
                     ),
-                    onPressed: () => context.push('/product'),
+                    onPressed: onScan,
                     child: Row(
                       children: <Widget>[
                         Expanded(

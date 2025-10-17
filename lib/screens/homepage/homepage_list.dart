@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:off/model/product.dart';
 import 'package:off/res/app_colors.dart';
+import 'package:off/screens/homepage/homepage_notifier.dart';
+import 'package:provider/provider.dart';
 
 class HomepageList extends StatefulWidget {
   const HomepageList({super.key});
@@ -15,12 +18,10 @@ class _HomepageListState extends State<HomepageList> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Product> products = List<Product>.generate(
-      1000,
-      (_) => generateProduct(),
-    );
+    final List<Product> products = context.watch<HomepageNotifier>().products;
 
     return ListView.builder(
+      itemCount: products.length,
       itemBuilder: (BuildContext context, int position) {
         return _HomepageListItem(product: products[position]);
       },
@@ -45,7 +46,7 @@ class _HomepageListItem extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: _borderRadius),
       child: InkWell(
         borderRadius: _borderRadius,
-        onTap: () {},
+        onTap: () => context.push('/product'),
         child: ClipRRect(
           borderRadius: _borderRadius,
           child: Padding(

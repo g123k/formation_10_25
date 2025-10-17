@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:off/l10n/app_localizations.dart';
-import 'package:off/model/product.dart';
 import 'package:off/res/app_icons.dart';
 import 'package:off/screens/product/product_header.dart';
 import 'package:off/screens/product/product_provider.dart';
@@ -8,6 +7,7 @@ import 'package:off/screens/product/tabs/product_tab0.dart';
 import 'package:off/screens/product/tabs/product_tab1.dart';
 import 'package:off/screens/product/tabs/product_tab2.dart';
 import 'package:off/screens/product/tabs/product_tab3.dart';
+import 'package:provider/provider.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -28,37 +28,52 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations localizations = AppLocalizations.of(context)!;
-    final Product product = generateProduct();
 
-    return ProductProvider(
-      product: product,
+    return ChangeNotifierProvider<ProductNotifier>(
+      create: (_) => ProductNotifier(barcode: '123456789'),
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: CustomScrollView(
-          slivers: <Widget>[
-            ProductHeader(),
-            SliverPadding(
-              padding: EdgeInsetsDirectional.only(top: 10.0),
-              sliver: SliverFillRemaining(
-                fillOverscroll: true,
-                hasScrollBody: false,
-                child: _getBody(),
-              ),
-            ),
-          ],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _tab.index,
-          onTap: (int position) =>
-              setState(() => _tab = ProductDetailsCurrentTab.values[position]),
-          items: ProductDetailsCurrentTab.values
-              .map(
-                (ProductDetailsCurrentTab tab) => BottomNavigationBarItem(
-                  icon: Icon(tab.icon),
-                  label: tab.label(localizations),
-                ),
-              )
-              .toList(growable: false),
+        body: Consumer<ProductNotifier>(
+          builder: (BuildContext context, ProductNotifier notifier, _) {
+            if (notifier.product == null) {
+              return const Center(child: CircularProgressIndicator());
+            } else {
+              return Column(
+                children: [
+                  Expanded(
+                    child: CustomScrollView(
+                      slivers: <Widget>[
+                        ProductHeader(),
+                        SliverPadding(
+                          padding: EdgeInsetsDirectional.only(top: 10.0),
+                          sliver: SliverFillRemaining(
+                            fillOverscroll: true,
+                            hasScrollBody: false,
+                            child: _getBody(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  BottomNavigationBar(
+                    currentIndex: _tab.index,
+                    onTap: (int position) => setState(
+                      () => _tab = ProductDetailsCurrentTab.values[position],
+                    ),
+                    items: ProductDetailsCurrentTab.values
+                        .map(
+                          (ProductDetailsCurrentTab tab) =>
+                              BottomNavigationBarItem(
+                                icon: Icon(tab.icon),
+                                label: tab.label(localizations),
+                              ),
+                        )
+                        .toList(growable: false),
+                  ),
+                ],
+              );
+            }
+          },
         ),
       ),
     );

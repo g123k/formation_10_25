@@ -5,6 +5,7 @@ import 'package:off/res/app_colors.dart';
 import 'package:off/res/app_icons.dart';
 import 'package:off/res/app_theme_extension.dart';
 import 'package:off/screens/product/product_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProductTab0 extends StatelessWidget {
   const ProductTab0({super.key});
@@ -86,7 +87,7 @@ class _Scores extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Product product = ProductProvider.of(context).product;
+    final Product product = context.watch<ProductNotifier>().product!;
 
     return DefaultTextStyle(
       style: context.theme.altText,
@@ -292,7 +293,7 @@ class _Info extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations localizations = AppLocalizations.of(context)!;
-    final Product product = ProductProvider.of(context).product;
+    final Product product = context.watch<ProductNotifier>().product!;
 
     return Column(
       mainAxisSize: MainAxisSize.min,

@@ -4,13 +4,14 @@ import 'package:off/l10n/app_localizations.dart';
 import 'package:off/model/product.dart';
 import 'package:off/res/app_colors.dart';
 import 'package:off/screens/product/product_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProductTab3 extends StatelessWidget {
   const ProductTab3({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Product product = ProductProvider.of(context).product;
+    final Product product = context.watch<ProductNotifier>().product!;
     if (product.nutritionFacts == null) {
       return const SizedBox.shrink();
     }
