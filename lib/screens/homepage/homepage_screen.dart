@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:off/l10n/app_localizations.dart';
 import 'package:off/res/app_icons.dart';
-import 'package:off/screens/homepage/homepage_list.dart';
+import 'package:off/screens/homepage/homepage_empty.dart';
+import 'package:off/screens/product/product_screen.dart';
 
 class HomepageScreen extends StatelessWidget {
   const HomepageScreen({super.key});
@@ -16,7 +17,15 @@ class HomepageScreen extends StatelessWidget {
         centerTitle: false,
         actions: <Widget>[
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) {
+                    return ProductScreen();
+                  },
+                ),
+              );
+            },
             icon: Padding(
               padding: const EdgeInsetsDirectional.only(end: 8.0),
               child: Icon(AppIcons.barcode),
@@ -24,7 +33,7 @@ class HomepageScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: HomepageList(),
+      body: HomepageEmpty(),
     );
   }
 }

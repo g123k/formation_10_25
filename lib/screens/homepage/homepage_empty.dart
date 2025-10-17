@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:off/l10n/app_localizations.dart';
 import 'package:off/res/app_colors.dart';
 import 'package:off/res/app_vectorial_images.dart';
@@ -37,7 +38,7 @@ class HomepageEmpty extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(22.0)),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => context.push('/product'),
                     child: Row(
                       children: <Widget>[
                         Expanded(

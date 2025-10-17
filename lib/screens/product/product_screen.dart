@@ -65,6 +65,26 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   Widget _getBody() {
+    return Stack(
+      children: <Widget>[
+        Offstage(
+          offstage: _tab != ProductDetailsCurrentTab.summary,
+          child: ProductTab0(),
+        ),
+        Offstage(
+          offstage: _tab != ProductDetailsCurrentTab.info,
+          child: ProductTab1(),
+        ),
+        Offstage(
+          offstage: _tab != ProductDetailsCurrentTab.nutrition,
+          child: ProductTab2(),
+        ),
+        Offstage(
+          offstage: _tab != ProductDetailsCurrentTab.nutritionalValues,
+          child: ProductTab3(),
+        ),
+      ],
+    );
     return switch (_tab) {
       ProductDetailsCurrentTab.summary => ProductTab0(),
       ProductDetailsCurrentTab.info => ProductTab1(),

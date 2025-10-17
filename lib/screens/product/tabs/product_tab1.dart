@@ -12,12 +12,14 @@ class _ProductTab1State extends State<ProductTab1> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: InkWell(
-      onTap: () => setState(() => counter++),
-      child: Padding(
-        padding: const EdgeInsetsDirectional.all(8.0),
-        child: Text(counter.toString()),
+    return Center(
+      child: InkWell(
+        onTap: () => setState(() => counter++),
+        child: Padding(
+          padding: const EdgeInsetsDirectional.all(8.0),
+          child: Text(counter.toString()),
+        ),
       ),
-    ));
+    );
   }
 }
