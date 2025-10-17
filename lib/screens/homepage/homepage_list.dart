@@ -2,12 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:off/model/product.dart';
 import 'package:off/res/app_colors.dart';
 
-class HomepageList extends StatelessWidget {
+class HomepageList extends StatefulWidget {
   const HomepageList({super.key});
 
   @override
+  State<HomepageList> createState() => _HomepageListState();
+}
+
+class _HomepageListState extends State<HomepageList> {
+  Color color = Colors.red;
+  double size = 100.0;
+
+  @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    final List<Product> products = List<Product>.generate(
+      1000,
+      (_) => generateProduct(),
+    );
+
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int position) {
+        return _HomepageListItem(product: products[position]);
+      },
+    );
   }
 }
 

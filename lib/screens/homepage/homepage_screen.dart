@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:off/l10n/app_localizations.dart';
 import 'package:off/res/app_icons.dart';
-import 'package:off/screens/homepage/homepage_empty.dart';
+import 'package:off/screens/homepage/homepage_list.dart';
 
 class HomepageScreen extends StatelessWidget {
   const HomepageScreen({super.key});
@@ -24,7 +24,7 @@ class HomepageScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: HomepageEmpty(),
+      body: HomepageList(),
     );
   }
 }

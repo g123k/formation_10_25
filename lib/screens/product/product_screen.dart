@@ -5,12 +5,29 @@ import 'package:off/res/app_icons.dart';
 import 'package:off/screens/product/product_header.dart';
 import 'package:off/screens/product/product_provider.dart';
 import 'package:off/screens/product/tabs/product_tab0.dart';
+import 'package:off/screens/product/tabs/product_tab1.dart';
+import 'package:off/screens/product/tabs/product_tab2.dart';
+import 'package:off/screens/product/tabs/product_tab3.dart';
 
-class ProductScreen extends StatelessWidget {
+class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
 
   @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
+  late ProductDetailsCurrentTab _tab;
+
+  @override
+  void initState() {
+    super.initState();
+    _tab = ProductDetailsCurrentTab.summary;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final AppLocalizations localizations = AppLocalizations.of(context)!;
     final Product product = generateProduct();
 
     return ProductProvider(
@@ -30,11 +47,31 @@ class ProductScreen extends StatelessWidget {
             ),
           ],
         ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _tab.index,
+          onTap: (int position) =>
+              setState(() => _tab = ProductDetailsCurrentTab.values[position]),
+          items: ProductDetailsCurrentTab.values
+              .map(
+                (ProductDetailsCurrentTab tab) => BottomNavigationBarItem(
+                  icon: Icon(tab.icon),
+                  label: tab.label(localizations),
+                ),
+              )
+              .toList(growable: false),
+        ),
       ),
     );
   }
 
-  Widget _getBody() => ProductTab0();
+  Widget _getBody() {
+    return switch (_tab) {
+      ProductDetailsCurrentTab.summary => ProductTab0(),
+      ProductDetailsCurrentTab.info => ProductTab1(),
+      ProductDetailsCurrentTab.nutrition => ProductTab2(),
+      ProductDetailsCurrentTab.nutritionalValues => ProductTab3(),
+    };
+  }
 }
 
 enum ProductDetailsCurrentTab {
