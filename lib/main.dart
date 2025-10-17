@@ -4,6 +4,7 @@ import 'package:off/demo.dart';
 import 'package:off/l10n/app_localizations.dart';
 import 'package:off/res/app_colors.dart';
 import 'package:off/res/app_theme_extension.dart';
+import 'package:off/screens/homepage/homepage_screen.dart';
 import 'package:off/screens/product/product_screen.dart';
 
 void main() {
@@ -14,7 +15,7 @@ GoRouter _router = GoRouter(
   routes: <GoRoute>[
     GoRoute(
       path: '/',
-      builder: (_, _) => const MyDemo(),
+      builder: (_, _) => const HomepageScreen(),
       routes: <GoRoute>[
         GoRoute(
           path: 'product',
