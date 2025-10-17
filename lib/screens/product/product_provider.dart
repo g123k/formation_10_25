@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:off/api/model/product_response.dart';
-import 'package:off/api/openfoodfacts_api.dart';
+import 'package:injectable/injectable.dart';
 import 'package:off/model/product.dart';
+import 'package:off/repositories/product_repository.dart';
 
+@injectable
 class ProductNotifier extends ChangeNotifier {
-  ProductNotifier({required this.barcode}) : _product = null {
+  ProductNotifier({
+    @factoryParam required this.barcode,
+    IProductRepository? repository,
+  }) : _repository = repository ?? ProductRepository() {
     loadProduct();
   }
+  final IProductRepository _repository;
 
   final String barcode;
   Product? _product;
 
   Future<void> loadProduct() async {
-    await Future<void>.delayed(const Duration(seconds: 1));
-
-    final ProductAPIEntity product = await OpenFoodFactsAPIManager()
-        .loadProduct(barcode);
-    _product = product.response?.toProduct();
+    _product = await _repository.getProduct(barcode);
     notifyListeners();
   }
 

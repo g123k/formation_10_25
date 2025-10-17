@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:injectable/injectable.dart';
 import 'package:off/l10n/app_localizations.dart';
+import 'package:off/main.config.dart';
 import 'package:off/res/app_colors.dart';
 import 'package:off/res/app_theme_extension.dart';
 import 'package:off/screens/homepage/homepage_screen.dart';
 import 'package:off/screens/product/product_screen.dart';
 
+final GetIt getIt = GetIt.instance;
+
+@InjectableInit(
+  initializerName: 'init',
+  preferRelativeImports: true,
+  asExtension: true,
+)
+void configureDependencies() => getIt.init();
+
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
 

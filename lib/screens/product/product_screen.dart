@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:off/l10n/app_localizations.dart';
+import 'package:off/main.dart';
 import 'package:off/res/app_icons.dart';
 import 'package:off/screens/product/product_header.dart';
 import 'package:off/screens/product/product_provider.dart';
@@ -30,7 +31,7 @@ class _ProductScreenState extends State<ProductScreen> {
     final AppLocalizations localizations = AppLocalizations.of(context)!;
 
     return ChangeNotifierProvider<ProductNotifier>(
-      create: (_) => ProductNotifier(barcode: '5000159484695'),
+      create: (_) => getIt<ProductNotifier>(param1: '5000159484695'),
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Consumer<ProductNotifier>(
